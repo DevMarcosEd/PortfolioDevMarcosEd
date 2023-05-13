@@ -1,33 +1,54 @@
+import { useEffect, useState } from 'react';
+import axios from 'axios';
+
 import Link from 'next/dist/client/link';
 import { Container } from './styles';
 
 import SectionTitle from '../SectionTitle';
 import ProjetoItem from './ProjetoItem';
 
+interface ProjetoProps {
+  name: string;
+  banner: string;
+  // type: string;
+  // slug: string;
+  // img: string;
+}
+
 function UltimosProjetos() {
+  const [projects, setProjects] = useState<ProjetoProps[]>([]);
+
+  useEffect(() => {
+    const fetchProjetos = async () => {
+      try {
+        const response = await axios.get(
+          `https://api.github.com/users/DevMarcosEd/repos`,
+          { params: { per_page: 4 } }
+        );
+
+        setProjects(response.data);
+        // eslint-disable-next-line no-console
+        console.log(response);
+      } catch (error) {
+        // eslint-disable-next-line no-console
+        console.log(error);
+      }
+    };
+    fetchProjetos();
+  }, []);
+
   return (
     <Container>
       <SectionTitle title="Ultimos Projetos" />
 
       <section>
-        <ProjetoItem
-          title="Projeto 01"
-          type="Website"
-          slug="teste"
-          img="https://images.alphacoders.com/748/748038.png"
-        />
-        <ProjetoItem
-          title="Projeto 01"
-          type="Website"
-          slug="teste"
-          img="https://images3.alphacoders.com/125/1252095.jpg"
-        />
-        <ProjetoItem
-          title="Projeto 01"
-          type="Website"
-          slug="teste"
-          img="https://images.alphacoders.com/122/1224908.jpg"
-        />
+        {projects.slice(0, 4).map(project => (
+          <ProjetoItem
+            key={project.name}
+            name={project.name}
+            banner={`https://raw.githubusercontent.com/DevMarcosEd/${project.name}/main/banner/${project.name}.png`}
+          />
+        ))}
       </section>
 
       <button type="button">
