@@ -14,7 +14,7 @@ interface ProjetoProps {
 
 export default function ProjetoItem({ name, banner }: ProjetoProps) {
   return (
-    <ProjetoContainer imgUrl={banner} data-aos="fade-up">
+    <ProjetoContainer banner={banner} data-aos="fade-up">
       {/* section vai ser o quabrado com a imagem e o texto */}
       <section>
         {/* div só e utilizada para criar o overlay */}

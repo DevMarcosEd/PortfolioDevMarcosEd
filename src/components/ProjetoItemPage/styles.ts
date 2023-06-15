@@ -1,15 +1,14 @@
 import styled from 'styled-components';
 
-// interface ContainerProps {
-//   imgUrl: string;
-// }
-/* background: url(${props => props.imgUrl}) no-repeat center; */
+interface ContainerProps {
+  bannerprojetos: string;
+}
 
-export const Container = styled.div`
+export const Container = styled.div<ContainerProps>`
   > a {
     position: relative;
     width: 100%;
-
+    background: url(${props => props.bannerprojetos}) no-repeat center;
     background-size: cover;
     height: 10rem;
     padding: 1.5rem;

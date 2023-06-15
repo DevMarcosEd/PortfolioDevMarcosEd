@@ -2,7 +2,7 @@ import { darken } from 'polished';
 import styled from 'styled-components';
 
 interface ProjetoProps {
-  imgUrl: string;
+  banner: string;
 }
 
 export const Container = styled.div`
@@ -93,7 +93,7 @@ export const ProjetoContainer = styled.div<ProjetoProps>`
   > section {
     width: 50rem;
     height: 100%;
-    background: url(${props => props.imgUrl}) no-repeat center;
+    background: url(${props => props.banner}) no-repeat center;
     background-size: cover;
     position: relative;
 
